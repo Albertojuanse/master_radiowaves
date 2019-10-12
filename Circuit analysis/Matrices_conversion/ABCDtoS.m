@@ -1,6 +1,6 @@
 function S = ABCDtoS(ABCD, Z01, Z02)
-%ABCDtoS Converts the given scattering coefficients matrix S to the
-%transmision coefficients matrix ABCD
+%ABCDtoS Converts the given transmision coefficients matrix S to the
+%scattering coefficients matrix S
 
 % Retrieve information
 A=ABCD(1,1); B=ABCD(1,2); C=ABCD(2,1); D=ABCD(2,2);
