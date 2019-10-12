@@ -1,6 +1,6 @@
 function [ABCD] = StoABCD(S, Z01, Z02)
 
-%2x2ABCDtoS Converts the given scattering coefficients matrix S to the
+%StoABCD Converts the given scattering coefficients matrix S to the
 %transmision coefficients matrix ABCD
 
 % Retrieve information
