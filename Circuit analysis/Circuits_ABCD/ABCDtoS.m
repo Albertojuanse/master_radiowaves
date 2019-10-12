@@ -12,8 +12,5 @@ S12   =   2 * sqrt( real(Z01) * real(Z02)) * (A*D-B*C)       / denom;
 S21   =   2 * sqrt( real(Z01) * real(Z02))                   / denom;
 S22   = (-A * conj(Z02) + B - C * conj(Z02) * Z01 + D * Z01) / denom;
 
-S22=(D+B/Z01-C*Z02-A*Z02/Z01)/denom;
-S12=2*sqrt(Z02/Z01)*(A*D-B*C)/denom;
-
 % Compose result
 S = [S11 S12; S21 S22];
