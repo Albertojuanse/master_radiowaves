@@ -3,7 +3,7 @@ function S = ABCDtoS(ABCD, Z01, Z02)
 %transmision coefficients matrix ABCD
 
 % Retrieve information
-A=ABCD(1,1); B=ABCD(1,2); C=ABCD(2,1); D=ABCDT(2,2);
+A=ABCD(1,1); B=ABCD(1,2); C=ABCD(2,1); D=ABCD(2,2);
 
 % Conversion
 denom =   A * Z02 + B + C *      Z01  * Z02 + D * Z01;
@@ -12,8 +12,8 @@ S12   =   2 * sqrt( real(Z01) * real(Z02)) * (A*D-B*C)       / denom;
 S21   =   2 * sqrt( real(Z01) * real(Z02))                   / denom;
 S22   = (-A * conj(Z02) + B - C * conj(Z02) * Z01 + D * Z01) / denom;
 
-S22=(D+B/Z01-C*Z02-A*Z02/Z01)/denom2;
-S12=2*sqrt(Z02/Z01)*(A*D-B*C)/denom2;
+S22=(D+B/Z01-C*Z02-A*Z02/Z01)/denom;
+S12=2*sqrt(Z02/Z01)*(A*D-B*C)/denom;
 
 % Compose result
 S = [S11 S12; S21 S22];
