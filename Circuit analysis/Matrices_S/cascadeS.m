@@ -9,5 +9,5 @@ ABCD2 = StoABCD(S2, Z021, Z022);
 ABCD = cascadeABCD(ABCD1, ABCD2);
 
 % Final conversion
-S = ABCDtoS(ABCD);
+S = ABCDtoS(ABCD, Z011, Z022);
 end

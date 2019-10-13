@@ -5,7 +5,7 @@ function S = Ex2_MatricesConversions()
 %   de parámetros ABCD. Implemente la función inversa.
 
 % Declaration
-S0 = [1 0, 0 1];
+S0 = [0.5 0.5; 0.5 0.5];
 Z01 = 50;
 Z02 = 50;
 
