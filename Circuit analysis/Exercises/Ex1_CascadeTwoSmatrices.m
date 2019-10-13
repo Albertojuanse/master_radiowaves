@@ -1,5 +1,5 @@
-function S = Ex1_()
-%EX1_CascadeTwoSmatrices
+function S = Ex1_CascadeTwoSmatrices()
+%EX1_CASCADETWOSMATRICES
 %   Implemente una función que tome como entrada dos matrices de parámetros
 %   S de dos cuadripolos referidas a la misma impedancia, y devuélva la 
 %   matriz S de la concatenación de ambos cuadripolos.
