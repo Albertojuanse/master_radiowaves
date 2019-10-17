@@ -3,7 +3,7 @@ function [pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m)
 %response of a given n order Butterworth filter.
 
 % Input varialbles
-pulsation_max = 2 * pi;
+pulsation_max = 1;
 pulsation = linspace(0, pulsation_max, m);
 
 % The theorical response of a Butterwirth filter is

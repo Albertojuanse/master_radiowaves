@@ -4,45 +4,38 @@
 
 m = 1000;
 n = 1;
-frequency_max = 1/2*pi;
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m);
+[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
 
 plot(pulsation, module)
 hold on;
 
 m = 1000;
 n = 2;
-frequency_max = 1/2*pi;
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m);
+[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
 
 plot(pulsation, module)
 hold on;
 
 m = 1000;
 n = 3;
-frequency_max = 1/2*pi;
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m);
+[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
 
 plot(pulsation, module)
 hold on;
 
 m = 1000;
 n = 4;
-frequency_max = 1/2*pi;
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m);
-
+[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
 plot(pulsation, module)
 hold on;
 
 m = 1000;
 n = 5;
-frequency_max = 1/2*pi;
-
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m);
+[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
 
 plot(pulsation, module)
 hold on;
@@ -50,11 +43,57 @@ hold on;
 
 m = 1000;
 n = 6;
-frequency_max = 1/2*pi;
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m);
+[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
 
 
 plot(pulsation, module)
-hold off;
+hold on;
 
+m = 1000;
+n = 1;
+epsilon = 1;
+
+[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
+
+plot(pulsation, module)
+hold on;
+
+m = 1000;
+n = 2;
+epsilon = 1;
+
+[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
+
+plot(pulsation, module)
+hold on;
+
+m = 1000;
+n = 3;
+epsilon = 1;
+
+[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
+
+plot(pulsation, module)
+hold on;
+
+m = 1000;
+n = 4;
+epsilon = 1;
+
+[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
+
+plot(pulsation, module)
+hold on;
+
+m = 1000;
+n = 5;
+epsilon = 1;
+
+[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
+
+plot(pulsation, module)
+
+xlim([0 1]);
+ylim([0 3]);
+hold off;
