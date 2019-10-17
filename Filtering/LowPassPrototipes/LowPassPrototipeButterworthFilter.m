@@ -1,9 +1,9 @@
-function [pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, frequency_max, m)
+function [pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m)
 %LOWPASSPROTOTIPEBUTTERWORTHFILTER Generates the theorycal m points
-%response of a given n order and cut frecuency Butterworth filter.
+%response of a given n order Butterworth filter.
 
 % Input varialbles
-pulsation_max = 2 * pi * frequency_max;
+pulsation_max = 2 * pi;
 pulsation = linspace(0, pulsation_max, m);
 
 % The theorical response of a Butterwirth filter is
