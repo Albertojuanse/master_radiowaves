@@ -1,98 +1,44 @@
 
 %% Exercise 1
-%
+% Representar sobre una misma figura las respuestas teóricas (la expresión
+% teórica del parámetro S21 en dB en función del polinomio correspondiente)
+% de un filtro paso bajo normalizado de orden N=5:
+% a. Para un filtro de Butterworth.
+% b. Para un filtro de Chebychev de 0.1dB de rizado de tx.
+% c. Para un filtro de Chebychev de 0.01dB de rizado de tx.
+% En el informe, se presentará una figura donde se vea un rango de 
+% atenuación de 60dB, y otra figura obtenida de la anterior con un zoom, 
+% simplemente mostrando el detalle de la banda de paso con un rango de 0.5 
+% dB. El eje de abscisas en los dos casos siempre será la frecuencia en Hz.
 
-m = 1000;
-n = 1;
+% Butterworth filters
+m = 1000;               % Number of samples
+n = 1:5;                % Order
+pulsation_max = 2 * pi; % Max pulsation in arrays
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
+for i_n = n
+    
+    [pulsation, module, phase] = LowPassPrototipeButterworthFilter(i_n, m, pulsation_max);
+    plot(pulsation, module)
+    hold on;
 
-plot(pulsation, module)
-hold on;
+end
 
-m = 1000;
-n = 2;
+% Chebychev filters
+m = 1000;               % Number of samples
+n = 1:5;                % Order
+pulsation_max = 2 * pi; % Max pulsation in arraysn = 1:5;
+epsilon = 1;            % Epsilon for ripple
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
+for i_n = n
 
-plot(pulsation, module)
-hold on;
+    [pulsation, module, phase] = LowPassPrototipeChebychevFilter(i_n, m, epsilon, pulsation_max);
+    plot(pulsation, module)
+    hold on;
 
-m = 1000;
-n = 3;
+end
 
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
-
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 4;
-
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 5;
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
-
-plot(pulsation, module)
-hold on;
-
-
-m = 1000;
-n = 6;
-
-[pulsation, module, phase] = LowPassPrototipeButterworthFilter(n, m);
-
-
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 1;
-epsilon = 1;
-
-[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
-
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 2;
-epsilon = 1;
-
-[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
-
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 3;
-epsilon = 1;
-
-[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
-
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 4;
-epsilon = 1;
-
-[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
-
-plot(pulsation, module)
-hold on;
-
-m = 1000;
-n = 5;
-epsilon = 1;
-
-[pulsation, module, phase] = LowPassPrototipeChebychevFilter(n, m, epsilon);
-
-plot(pulsation, module)
+% Plot configurationliou
 
 xlim([0 1]);
 ylim([0 3]);

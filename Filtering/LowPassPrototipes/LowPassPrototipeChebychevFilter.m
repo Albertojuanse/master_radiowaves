@@ -1,9 +1,8 @@
-function [pulsation, module, phase] =  LowPassPrototipeChebychevFilter(n, m, epsilon)
+function [pulsation, module, phase] =  LowPassPrototipeChebychevFilter(n, m, pulsation_max, epsilon)
 %LOWPASSPROTOTIPECHEBYCHEVFILTER Generates the theorycal m points
 %response of a given n order and epsilon Chebychev filter.
 
 % Input varialbles
-pulsation_max = 1;
 pulsation = linspace(0, pulsation_max, m);
 
 % The theorical response of a Butterwirth filter is
