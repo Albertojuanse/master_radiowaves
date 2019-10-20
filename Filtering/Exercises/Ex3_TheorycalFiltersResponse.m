@@ -1,4 +1,4 @@
-%% Exercise 1
+%% Exercise 3
 % Representar como en el ejercicio 1) las respuestas teóricas (la expresión
 % teórica del parámetro S21 en dB en función del polinomio correspondiente)
 % de un filtro paso bajo normalizado de Chebychev de 0.1dB de rizado de 

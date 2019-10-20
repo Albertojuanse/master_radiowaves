@@ -1,4 +1,4 @@
-%% Exercise 1
+%% Exercise 2
 % Representar sobre una misma figura las respuestas teóricas (la expresión
 % teórica del parámetro S21 en dB en función del polinomio correspondiente)
 % de un filtro paso bajo normalizado de orden N=5:
