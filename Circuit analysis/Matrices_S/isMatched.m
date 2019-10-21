@@ -1,0 +1,14 @@
+function [res, matches] = isMatched(S)
+%ISMATCHED Return true if tyhe given S matrix's system is matched in
+%any port
+
+% If it is matched, some Sii parameter is equals to cero
+res = false;
+matches = {};
+for i_s = 1:size(S, 2)
+    if S(i_s, i_s) == 0
+        res = true;
+        matches{1, end+1} = i_s;
+    end
+end
+end
