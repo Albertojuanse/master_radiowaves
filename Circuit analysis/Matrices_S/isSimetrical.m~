@@ -1,0 +1,15 @@
+function res = isSimetrical(S)
+%ISSIMETRICAL Return true if tyhe given S matrix's system is simetrical in
+%any port
+
+% If it is simetrical, some Sii parameter is equals to other Sjj
+res = false;
+for i_s = 1:size(S, 2)
+    for j_s = 1:size(S, 2)
+        
+        
+        
+    end
+end
+end
+
