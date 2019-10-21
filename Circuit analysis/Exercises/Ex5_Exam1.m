@@ -21,48 +21,43 @@ wavelength = velocity_0 ./ frequency * sqrt(permeability_r * permittibity_r);
 
 % Zc line
 longitude_c = 0.075;
+beta = 2*pi./wavelength;
 Z_C = 50;
 
 % Ports impedances
 Z01 = 50;
 Z02 = 50;
 
-%% Define the isolated element
+%% Define the isolated element for each wavelenght
 
-% ZL1
-ZL1_admitance = ShortCircuitedStubAdmitance(ZL1, L1_electrical_longitude, 1);
-ZL1_ABCD = ABCDofAdmitance(ZL1_admitance);
- 
-% ZL2
-ZL2_admitance = ShortCircuitedStubAdmitance(ZL2, L2_electrical_longitude, 1);
-ZL2_ABCD = ABCDofAdmitance(ZL2_admitance);
-
-% Zc line
-Zc_ABCD = ABCDofLine(Zc, Lc_electrical_longitude, 1);
-
-%% Second case. Compose them
-circuit_ABCD = cascadeABCD(ZL1_ABCD, Zc_ABCD);
-circuit_ABCD = cascadeABCD(circuit_ABCD, Zc_ABCD);
-circuit_S = ABCDtoS(circuit_ABCD, Z0, Z0);
-
-% Retrieve final calculus for drawing purposes
-module_S11 = zeros(1, size(frequency, 2));
-module_S12 = zeros(1, size(frequency, 2));
-module_S12 = zeros(1, size(frequency, 2));
-module_S22 = zeros(1, size(frequency, 2));
-for i_freq = 1:size(frequency, 2)
-    shift_circuit_S = shiftInterfacesToS(circuit_S, beta0(i_freq), longitude0, 1, beta0(i_freq), longitude0, 1);
-    module_S11(i_freq) = abs(shift_circuit_S(1, 1));
-    module_S12(i_freq) = abs(shift_circuit_S(1, 2));
-    module_S21(i_freq) = abs(shift_circuit_S(2, 1));
-    module_S22(i_freq) = abs(shift_circuit_S(2, 2));
+% The whole component can be seen as a open circuited stub, whose
+% admitance is
+ZLC_admitances = zeros(1, size(beta, 2));
+for i_beta = 1:size(beta, 2)
+    ZLC_admitances(1, i_beta) = OpenCircuitedStubAdmitance(Z_C, beta(i_beta), longitude_c);
 end
 
-%% Second case. Verify properties.
-fprintf('The matrix S obteined is reciprocal: %s\n',mat2str(isReciprocal(circuit_S)));
-fprintf('The matrix S obteined is lossless: %s\n',mat2str(isLossless(circuit_S)));
+% and thus, its ABCD matrix
+ZLC_ABCD = cell(1, size(ZLC_admitances, 2));
+for i_admitance = 1:size(ZLC_admitances, 2)
+    ZLC_ABCD{1, i_admitance} = ABCDofAdmitance(ZLC_admitances(1, i_admitance));
+end
+ 
+% Get the S-matrix of each
+ZLC_S11 = zeros(size(ZLC_ABCD, 2));
+ZLC_S12 = zeros(size(ZLC_ABCD, 2));
+ZLC_S21 = zeros(size(ZLC_ABCD, 2));
+ZLC_S22 = zeros(size(ZLC_ABCD, 2));
+for i_ABCD = 1:size(ZLC_ABCD, 2)
+    ZLC_S = ABCDtoS(ZLC_ABCD{i_ABCD}, Z01, Z02);
+    ZLC_S11(i_ABCD) = 20*log(abs(ZLC_S(1, 1)));
+    ZLC_S12(i_ABCD) = 20*log(abs(ZLC_S(1, 2)));
+    ZLC_S21(i_ABCD) = 20*log(abs(ZLC_S(2, 1)));
+    ZLC_S22(i_ABCD) = 20*log(abs(ZLC_S(2, 2)));
+end
 
-%% Second case. Plot
-plot(frequency, module_S11);
+%% Plot
+plot(frequency, ZLC_S11);
+plot(frequency, ZLC_S12);
 
 
