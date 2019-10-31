@@ -57,7 +57,9 @@ for i_ABCD = 1:size(ZLC_ABCD, 2)
 end
 
 %% Plot
+figure
 plot(frequency, ZLC_S11);
+figure
 plot(frequency, ZLC_S12);
 
 
