@@ -23,8 +23,8 @@ pulsation = linspace(0, pulsation_max, m);  % Pulsation
 
 Butterworth_S11_module = zeros(1, size(pulsation, 2));
 Butterworth_S11_phase = zeros(1, size(pulsation, 2));
-Butterworth_S12_module = zeros(1, size(pulsation, 2));
-Butterworth_S12_phase = zeros(1, size(pulsation, 2));
+Butterworth_S21_module = zeros(1, size(pulsation, 2));
+Butterworth_S21_phase = zeros(1, size(pulsation, 2));
 
 for i_pulsation = 1:size(pulsation, 2)
     ABCD1 = ABCDofAdmitance(1j*pulsation(i_pulsation)*Butterworth_coefficients(1));
@@ -41,13 +41,13 @@ for i_pulsation = 1:size(pulsation, 2)
     
     Butterworth_S11_module(1, i_pulsation) = abs(S(1,1));
     Butterworth_S11_phase(1, i_pulsation) = angle(S(1,1));
-    Butterworth_S12_module(1, i_pulsation) = abs(S(1,2));
-    Butterworth_S12_phase(1, i_pulsation) = angle(S(1,2));
+    Butterworth_S21_module(1, i_pulsation) = abs(S(2,1));
+    Butterworth_S21_phase(1, i_pulsation) = angle(S(2,1));
     
 end
 
-Butterworth_S11_delay = diff(unwrap(Butterworth_S11_phase))/(pulsation_max/m);
-Butterworth_S12_delay = diff(unwrap(Butterworth_S12_phase))/(pulsation_max/m);
+Butterworth_S11_delay = -(1/2*pi)*diff(unwrap(Butterworth_S11_phase))/(pulsation_max/m)
+Butterworth_S21_delay = -(1/2*pi)*diff(unwrap(Butterworth_S21_phase))/(pulsation_max/m)
     
 %% Chebychev filter elements synthesis
 
@@ -58,8 +58,8 @@ RL = -10*log10(1+1/(epsilon)^2);        % For coefficients
 
 Chebychev_S11_module = zeros(1, size(pulsation, 2));
 Chebychev_S11_phase = zeros(1, size(pulsation, 2));
-Chebychev_S12_module = zeros(1, size(pulsation, 2));
-Chebychev_S12_phase = zeros(1, size(pulsation, 2));
+Chebychev_S21_module = zeros(1, size(pulsation, 2));
+Chebychev_S21_phase = zeros(1, size(pulsation, 2));
 
 for i_pulsation = 1:size(pulsation, 2)
     ABCD1 = ABCDofAdmitance(1j*pulsation(i_pulsation)*Chebychev_coefficients(1));
@@ -76,13 +76,13 @@ for i_pulsation = 1:size(pulsation, 2)
     
     Chebychev_S11_module(1, i_pulsation) = abs(S(1,1));
     Chebychev_S11_phase(1, i_pulsation) = angle(S(1,1));
-    Chebychev_S12_module(1, i_pulsation) = abs(S(1,2));
-    Chebychev_S12_phase(1, i_pulsation) = angle(S(1,2));
+    Chebychev_S21_module(1, i_pulsation) = abs(S(2,1));
+    Chebychev_S21_phase(1, i_pulsation) = angle(S(2,1));
     
 end
 
-Chebychev_S11_delay = diff(unwrap(Chebychev_S11_phase))/(pulsation_max/m);
-Chebychev_S12_delay = diff(unwrap(Chebychev_S12_phase))/(pulsation_max/m);
+Chebychev_S11_delay = -(1/2*pi)*diff(unwrap(Chebychev_S11_phase))/(pulsation_max/m);
+Chebychev_S21_delay = -(1/2*pi)*diff(unwrap(Chebychev_S21_phase))/(pulsation_max/m);
 
 %% Bessel filter elements synthesis
 
@@ -91,8 +91,8 @@ Chebychev_S12_delay = diff(unwrap(Chebychev_S12_phase))/(pulsation_max/m);
 
 Bessel_S11_module = zeros(1, size(pulsation, 2));
 Bessel_S11_phase = zeros(1, size(pulsation, 2));
-Bessel_S12_module = zeros(1, size(pulsation, 2));
-Bessel_S12_phase = zeros(1, size(pulsation, 2));
+Bessel_S21_module = zeros(1, size(pulsation, 2));
+Bessel_S21_phase = zeros(1, size(pulsation, 2));
 
 for i_pulsation = 1:size(pulsation, 2)
     ABCD1 = ABCDofAdmitance(1j*pulsation(i_pulsation)*Bessel_coefficients(1));
@@ -109,48 +109,48 @@ for i_pulsation = 1:size(pulsation, 2)
     
     Bessel_S11_module(1, i_pulsation) = abs(S(1,1));
     Bessel_S11_phase(1, i_pulsation) = angle(S(1,1));
-    Bessel_S12_module(1, i_pulsation) = abs(S(1,2));
-    Bessel_S12_phase(1, i_pulsation) = angle(S(1,2));
+    Bessel_S21_module(1, i_pulsation) = abs(S(2,1));
+    Bessel_S21_phase(1, i_pulsation) = angle(S(2,1));
     
 end
 
-Bessel_S11_delay = diff(unwrap(Bessel_S11_phase))/(pulsation_max/m);
-Bessel_S12_delay = diff(unwrap(Bessel_S12_phase))/(pulsation_max/m);
+Bessel_S11_delay = -(1/2*pi)*diff(unwrap(Bessel_S11_phase))/(pulsation_max/m);
+Bessel_S21_delay = -(1/2*pi)*diff(unwrap(Bessel_S21_phase))/(pulsation_max/m);
 
 %% Plot
 figure;
-title({'S11 and S12 coefficients of a Butterworth filter'});
+title({'S11 and S21 coefficients of a Butterworth filter'});
 subplot(2,1,1);
 plot(pulsation, Butterworth_S11_module);
 hold on;
-plot(pulsation, Butterworth_S12_module);
+plot(pulsation, Butterworth_S21_module);
 
 subplot(2,1,2); 
 plot(pulsation(1:end-1), Butterworth_S11_delay);
 hold on;
-plot(pulsation(1:end-1), Butterworth_S12_delay);
+plot(pulsation(1:end-1), Butterworth_S21_delay);
 
 figure;
-title({'S11 and S12 coefficients of a Chebychev filter'});
+title({'S11 and S21 coefficients of a Chebychev filter'});
 subplot(2,1,1);
 plot(pulsation, Chebychev_S11_module);
 hold on;
-plot(pulsation, Chebychev_S12_module);
+plot(pulsation, Chebychev_S21_module);
 
 subplot(2,1,2); 
 plot(pulsation(1:end-1), Chebychev_S11_delay);
 hold on;
-plot(pulsation(1:end-1), Chebychev_S12_delay);
+plot(pulsation(1:end-1), Chebychev_S21_delay);
 
 
 figure;
-title({'S11 and S12 coefficients of a Bessel filter'});
+title({'S11 and S21 coefficients of a Bessel filter'});
 subplot(2,1,1);
 plot(pulsation, Bessel_S11_module);
 hold on;
-plot(pulsation, Bessel_S12_module);
+plot(pulsation, Bessel_S21_module);
 
 subplot(2,1,2); 
 plot(pulsation(1:end-1), Bessel_S11_delay);
 hold on;
-plot(pulsation(1:end-1), Bessel_S12_delay);
+plot(pulsation(1:end-1), Bessel_S21_delay);
