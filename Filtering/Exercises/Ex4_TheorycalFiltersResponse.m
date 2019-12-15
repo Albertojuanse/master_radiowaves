@@ -23,7 +23,7 @@ end
 % Plot configuration
 title('Pérdidas de retorno teórica equirizada de órdenes 3 a 5');
 xlim([0 pulsation_max/2*pi]);
-ylim([-60 0]);
+ylim([-120 0]);
 xlabel('Frecuencia (Hz)');
 ylabel('Módulo (dB)');
 hold off;

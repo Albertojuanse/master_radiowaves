@@ -10,8 +10,8 @@
 m = 1000;                                   % Number of samples
 n = 5;                                      % Order
 norm_pulsation_max = 2;                     % Max pulsation in arrays
-freqcuency_cut = 1.8e9;                     % Denormalized cut frequency
-pulsation_cut = freqcuency_cut * 2 * pi;    % Denormalized cut pulsation
+frequency_cut = 1.8e9;                      % Denormalized cut frequency
+pulsation_cut = frequency_cut * 2 * pi;     % Denormalized cut pulsation
 pulsation_max = 2 * pulsation_cut;          % Pulsation for representation
 pulsation = linspace(0, pulsation_max, m);  % Pulsation
 porcentual_bandwidth = 0.15;                % Bandwidth
@@ -59,11 +59,13 @@ figure;
 title({'S11 and S12 coefficients of a Chebychev filter', 'f = 1,8 GHz N = 5'});
 subplot(2,1,1);
 plot(pulsation, Chebychev_S11_module);
+subplot(2,1,2); 
 hold on;
 plot(pulsation, Chebychev_S12_module);
 
-subplot(2,1,2); 
+subplot(2,1,1);
 plot(pulsation(1:end-1), Chebychev_S11_delay);
 hold on;
+subplot(2,1,2); 
 plot(pulsation(1:end-1), Chebychev_S12_delay);
 

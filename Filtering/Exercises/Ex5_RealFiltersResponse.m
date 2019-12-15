@@ -1,5 +1,5 @@
 %% Exercise 5
-% tilizando los valores gi, calcular y representar la respuesta de ese
+% Utilizando los valores gi, calcular y representar la respuesta de ese
 % circuito (S11, S21 en dB y retardo de grupo en seg. de un filtro paso 
 % bajo normalizado de orden N=5:
 % a. Para un filtro de Butterworth.
@@ -46,8 +46,9 @@ for i_pulsation = 1:size(pulsation, 2)
     
 end
 
-Butterworth_S11_delay = -(1/2*pi)*diff(unwrap(Butterworth_S11_phase))/(pulsation_max/m)
-Butterworth_S21_delay = -(1/2*pi)*diff(unwrap(Butterworth_S21_phase))/(pulsation_max/m)
+Butterworth_S11_delay = -(1/2*pi)*diff(unwrap(Butterworth_S11_phase))/(pulsation_max/m);
+Butterworth_S11_delay(1) = Butterworth_S11_delay(2);
+Butterworth_S21_delay = -(1/2*pi)*diff(unwrap(Butterworth_S21_phase))/(pulsation_max/m);
     
 %% Chebychev filter elements synthesis
 
@@ -83,6 +84,24 @@ end
 
 Chebychev_S11_delay = -(1/2*pi)*diff(unwrap(Chebychev_S11_phase))/(pulsation_max/m);
 Chebychev_S21_delay = -(1/2*pi)*diff(unwrap(Chebychev_S21_phase))/(pulsation_max/m);
+for i_sample = 1:size(Chebychev_S11_delay,2)
+    if abs(Chebychev_S11_delay(i_sample)) > 100
+        if i_sample == 1
+            Chebychev_S11_delay(i_sample) = 0;
+        else
+            Chebychev_S11_delay(i_sample) = Chebychev_S11_delay(i_sample - 1);
+        end
+    end
+end
+for i_sample = 1:size(Chebychev_S21_delay,2)
+    if abs(Chebychev_S21_delay(i_sample)) > 100
+        if i_sample == 1
+            Chebychev_S21_delay(i_sample) = 0;
+        else
+            Chebychev_S21_delay(i_sample) = Chebychev_S21_delay(i_sample - 1);
+        end
+    end
+end
 
 %% Bessel filter elements synthesis
 
@@ -116,41 +135,74 @@ end
 
 Bessel_S11_delay = -(1/2*pi)*diff(unwrap(Bessel_S11_phase))/(pulsation_max/m);
 Bessel_S21_delay = -(1/2*pi)*diff(unwrap(Bessel_S21_phase))/(pulsation_max/m);
+for i_sample = 1:size(Bessel_S11_delay,2)
+    if abs(Bessel_S11_delay(i_sample)) > 100
+        if i_sample == 1
+            Bessel_S11_delay(i_sample) = 0;
+        else
+            Bessel_S11_delay(i_sample) = Bessel_S11_delay(i_sample - 1);
+        end
+    end
+end
+for i_sample = 1:size(Bessel_S21_delay,2)
+    if abs(Bessel_S21_delay(i_sample)) > 100
+        if i_sample == 1
+            Bessel_S21_delay(i_sample) = 0;
+        else
+            Bessel_S21_delay(i_sample) = Bessel_S21_delay(i_sample - 1);
+        end
+    end
+end
 
 %% Plot
 figure;
-title({'S11 and S21 coefficients of a Butterworth filter'});
 subplot(2,1,1);
 plot(pulsation, Butterworth_S11_module);
+title({'S11 and S21 module coefficients of a Butterworth filter'});
+ylabel('Module (dB)');
+xlabel('Pulsation (rad)');
 hold on;
 plot(pulsation, Butterworth_S21_module);
 
 subplot(2,1,2); 
 plot(pulsation(1:end-1), Butterworth_S11_delay);
+title({'S11 and S21 delay coefficients of a Butterworth filter'});
+ylabel('Delay (s)');
+xlabel('Pulsation (rad)');
 hold on;
 plot(pulsation(1:end-1), Butterworth_S21_delay);
 
 figure;
-title({'S11 and S21 coefficients of a Chebychev filter'});
 subplot(2,1,1);
 plot(pulsation, Chebychev_S11_module);
+title({'S11 and S21 module coefficients of a Chebychev filter'});
+ylabel('Module (dB)');
+xlabel('Pulsation (rad)');
 hold on;
 plot(pulsation, Chebychev_S21_module);
 
 subplot(2,1,2); 
 plot(pulsation(1:end-1), Chebychev_S11_delay);
+title({'S11 and S21 delay coefficients of a Chebychev filter'});
+ylabel('Delay (s)');
+xlabel('Pulsation (rad)');
 hold on;
 plot(pulsation(1:end-1), Chebychev_S21_delay);
 
 
 figure;
-title({'S11 and S21 coefficients of a Bessel filter'});
 subplot(2,1,1);
 plot(pulsation, Bessel_S11_module);
+title({'S11 and S21 module coefficients of a Bessel filter'});
+ylabel('Module (dB)');
+xlabel('Pulsation (rad)');
 hold on;
 plot(pulsation, Bessel_S21_module);
 
 subplot(2,1,2); 
 plot(pulsation(1:end-1), Bessel_S11_delay);
+title({'S11 and S21 delay coefficients of a Bessel filter'});
+ylabel('Delay (s)');
+xlabel('Pulsation (rad)');
 hold on;
 plot(pulsation(1:end-1), Bessel_S21_delay);
