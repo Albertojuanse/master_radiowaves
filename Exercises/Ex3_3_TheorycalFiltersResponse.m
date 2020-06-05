@@ -1,3 +1,4 @@
+clc; clear all; close all;
 %% Exercise 3
 % Representar como en el ejercicio 1) las respuestas teóricas (la expresión
 % teórica del parámetro S21 en dB en función del polinomio correspondiente)

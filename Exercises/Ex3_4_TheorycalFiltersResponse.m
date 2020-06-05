@@ -1,3 +1,4 @@
+clc; clear all; close all;
 %% Exercise 4
 % Representar como en el ejercicio 3) las respuestas teóricas (la expresión
 % teórica del parámetro S11 en dB en función del polinomio correspondiente)
