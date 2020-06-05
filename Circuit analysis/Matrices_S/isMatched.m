@@ -6,9 +6,13 @@ function [res, matches] = isMatched(S)
 res = false;
 matches = {};
 for i_s = 1:size(S, 2)
-    if S(i_s, i_s) == 0
-        res = true;
+    if abs(S(i_s, i_s)) == 0
         matches{1, end+1} = i_s;
     end
+end
+if size(matches,2) == i_s
+    res = true;
+else
+    res = false;
 end
 end

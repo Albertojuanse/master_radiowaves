@@ -1,13 +1,13 @@
 clc; clear all; close all;
-%% Exercise 8
-% Sea un circuito formado por
+%% Exercise 4
+% Sea un circuito del ejercicio 1 formado por
 % -> una línea de longitud l_0, impedancia 50 Ω y c. de propagación beta_0;
 % -> una admitancia en paralelo ZL1 conectada por una línea de longitud λ/8
-%    impedancia característica 35 Ω y c. de propagación beta_1;
+%    impedancia característica 50 Ω y c. de propagación beta_1;
 % -> una línea en serie de longitud λ/4, impedancia Z_c y c. de propagación
 %    beta_c;
 % -> una admitancia en paralelo ZL2 conectada por una línea de longitud l_2
-%    impedancia característica 35 Ω y c. de propagación beta_2; y
+%    impedancia característica 50 Ω y c. de propagación beta_2; y
 % -> una línea en serie de longitud l_0, impedancia 50 Ω y c. de propagación
 %    beta_0.
 % Se sabe que en términos de admitancias Z0² = (YL1)² + Y_c²
@@ -15,7 +15,6 @@ clc; clear all; close all;
 % Calcular la matriz S del conjunto para
 % -> ZL1 = ZL2 = 0 y 
 % -> ZL1 = ZL2 = infinito,
-% 
 
 c0 = 3*10^8;
 f0 = 1*10^9;
@@ -25,8 +24,8 @@ Zc = 50;                % Línea central
 Yc = 1/Zc;
 Z1 = 50;                % Primer stub
 Z2 = 50;                % Segundo stub              a   b
-ZL1 = 0;                % Carga del primer stub     0   100000000
-ZL2 = 0;                % Carga del segundo stub    0   100000000
+ZL1 = 50;               % Carga del primer stub     0   100000000
+ZL2 = 50;               % Carga del segundo stub    0   100000000
 Z0 = 50;                % Carga de las bornas
 Y0 = 1/Z0;
 beta_c = 2*pi/lambda0;  % Constante de propagación línea central
@@ -63,9 +62,3 @@ MatrizExp(2,2) = exp(-1j*theta2);
 Sp = [S11p S12p; S21p S22p];
 
 S = MatrizExp*Sp*MatrizExp
-
-fprintf('The matrix S obteined is matched: %s\n',mat2str(isMatched(S)));
-fprintf('The matrix S obteined is reciprocal: %s\n',mat2str(isReciprocal(S)));
-fprintf('The matrix S obteined is pasive: %s\n',mat2str(isPasive(S)));
-fprintf('The matrix S obteined is lossless: %s\n',mat2str(isLossless(S)));
-fprintf('The matrix S obteined is pasive and lossless: %s\n',mat2str(isPassiveAndLossless(S)));
