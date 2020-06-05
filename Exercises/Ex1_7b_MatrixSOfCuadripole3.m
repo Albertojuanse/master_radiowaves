@@ -117,21 +117,21 @@ for i_f = 1:numel(vf)
 end
 
 figure(1);
-plot(vf, 10*log10(abs(S11T)));
+plot(vf, 20*log10(abs(S11T)));
 hold on;
-plot(vf, 10*log10(abs(S12T)));
+plot(vf, 20*log10(abs(S12T)));
 hold off;
 title("Parámetros S11 y S12")
 xlabel("Frecuencia")
-ylabel("Valor absoluto de los parámetros")
+ylabel("Valor absoluto de los parámetros (dB)")
 legend("S11", "S12")
 
 figure(2);
-plot(vf, 10*log10(abs(S21T)));
+plot(vf, 20*log10(abs(S21T)));
 hold on;
-plot(vf, 10*log10(abs(S22T)));
+plot(vf, 20*log10(abs(S22T)));
 hold off;
 title("Parámetros S21 y S22")
 xlabel("Frecuencia")
-ylabel("Valor absoluto de los parámetros")
+ylabel("Valor absoluto de los parámetros (dB)")
 legend("S21", "S22")
