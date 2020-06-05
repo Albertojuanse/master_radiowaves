@@ -1,3 +1,5 @@
+clc; clear all; close all;
+
 % Se desea diseñar una red de alimentación para 3 antenas con el siguiente 
 % esquema: 
 % 
