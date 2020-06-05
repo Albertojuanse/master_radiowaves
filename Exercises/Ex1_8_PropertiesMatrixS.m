@@ -1,5 +1,5 @@
 %CIRCUITMATRIXS 
-%% Exercise 3
+%% Exercise 4
 % Sea un circuito formado por
 % -> una línea de longitud l_0, impedancia 50 Ω y c. de propagación beta_0;
 % -> una admitancia en paralelo ZL1 conectada por una línea de longitud λ/8
@@ -26,7 +26,7 @@ pulsation = 2*pi*frequency;
 velocity_0 = 3e8;
 permeability_r = 1;
 permittibity_r = 1;
-wavelength = velocity_0 ./ frequency * sqrt(permeability_r * permittibity_r);
+wavelength = velocity_0 ./ (frequency * sqrt(permeability_r * permittibity_r));
 
 % Zo lines 
 Z0 = 50;                         % Charasteristic impedance
@@ -53,11 +53,11 @@ Yc = 1/Zc;
 % ZL1
 %As 'OpenCircuitedStubAdmitance()' needs both beta and longitude, as the 
 % electrical longitude is provided, one of the parameters is set 1.
-ZL1_admitance = OpenCircuitedStubAdmitance(ZL1, L1_electrical_longitude, 1);
+ZL1_admitance = 1/OpenCircuitedStubImpedance(ZL1, L1_electrical_longitude, 1);
 ZL1_ABCD = ABCDofAdmitance(ZL1_admitance);
 
 % ZL2
-ZL2_admitance = OpenCircuitedStubAdmitance(ZL2, L2_electrical_longitude, 1);
+ZL2_admitance = 1/OpenCircuitedStubImpedance(ZL2, L2_electrical_longitude, 1);
 ZL2_ABCD = ABCDofAdmitance(ZL2_admitance);
 
 % Zc line
@@ -65,7 +65,7 @@ Zc_ABCD = ABCDofLine(Zc, Lc_electrical_longitude, 1);
 
 %% First case. Compose them
 circuit_ABCD = cascadeABCD(ZL1_ABCD, Zc_ABCD);
-circuit_ABCD = cascadeABCD(circuit_ABCD, Zc_ABCD);
+circuit_ABCD = cascadeABCD(circuit_ABCD, ZL2_ABCD);
 circuit_S = ABCDtoS(circuit_ABCD, Z0, Z0);
 
 % Retrieve final calculus for drawing purposes
@@ -159,5 +159,3 @@ fprintf('The matrix S obteined is lossless: %s\n',mat2str(isLossless(circuit_S))
 
 %% Second case. Plot
 plot(frequency, module_S11);
-
-

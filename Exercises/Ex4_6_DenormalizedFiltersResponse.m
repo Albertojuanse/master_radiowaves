@@ -20,6 +20,10 @@ load_impedance = generator_impedance;
 
 %% Chebychev filter elements synthesis
 
+% Pulsation transformation
+transformed_pulsation = 1/(porcentual_bandwidth).*(pulsation./pulsation_cut - pulsation_cut./pulsation)
+plot(transformed_pulsation);
+
 % Coefficients
 epsilon = sqrt(10^(0.1/10) -1);         % Epsilon for 0.1 dB ripple
 RL = -10*log10(1+1/(epsilon)^2);        % For coefficients
@@ -58,14 +62,14 @@ Chebychev_S12_delay = diff(unwrap(Chebychev_S12_phase))/(pulsation_max/m);
 figure;
 title({'S11 and S12 coefficients of a Chebychev filter', 'f = 1,8 GHz N = 5'});
 subplot(2,1,1);
-plot(pulsation, Chebychev_S11_module);
+plot(transformed_pulsation, Chebychev_S11_module);
 subplot(2,1,2); 
 hold on;
-plot(pulsation, Chebychev_S12_module);
+plot(transformed_pulsation, Chebychev_S12_module);
 
 subplot(2,1,1);
-plot(pulsation(1:end-1), Chebychev_S11_delay);
+plot(transformed_pulsation(1:end-1), Chebychev_S11_delay);
 hold on;
 subplot(2,1,2); 
-plot(pulsation(1:end-1), Chebychev_S12_delay);
+plot(transformed_pulsation(1:end-1), Chebychev_S12_delay);
 
