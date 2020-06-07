@@ -6,25 +6,48 @@ clc; clear all; close all;
 % transmisión para N=3, N=4 y N=5.
 
 %% Fisrt Draw
-m = 1000;                               % Number of samples
-n = 3:5;                                % Order
-pulsation_max = 2 ;                     % Max pulsation in arraysn = 1:5;
+% Butterworth filters
+m = 1000;                           % Number of samples
+n = [3 4 5];                        % Orders
+pulsation = linspace(0, pi, m);     % Pulsation
+frequency = pulsation/(2*pi);
 
-epsilon = sqrt(10^(0.1/10) -1);         % Epsilon for 0.1 dB ripple
+figure(1);
+hold on;
 
+epsilon = sqrt(10^(0.1/10) -1);     % Epsilon for 0.1 dB ripple
 for i_n = n
 
-    [pulsation, module, phase] = LowPassPrototipeChebychevFilter(i_n, m, pulsation_max, epsilon);
-    return_loss = 1 - module;
-    plot(pulsation/2*pi, 20*log(return_loss))
-    hold on;
+    [module_S21, module_S11] = LowPassPrototipeChebychevFilter(i_n, pulsation, epsilon);
+    %plot(frequency, 10*log10(module_S21));
+    plot(frequency, 10*log10(module_S11));
 
 end
 
-% Plot configuration
-title('Pérdidas de retorno teórica equirizada de órdenes 3 a 5');
-xlim([0 pulsation_max/2*pi]);
-ylim([-120 0]);
+title('Respuesta teórica de filtros equirrizados de orden 3, 4 y 5');
+xlim([0 max(frequency)]);
+ylim([-60 0]);
+xlabel('Frecuencia (Hz)');
+ylabel('Módulo (dB)');
+hold off;
+
+%% Second draw
+
+figure(2);
+hold on;
+
+epsilon = sqrt(10^(0.1/10) -1);     % Epsilon for 0.1 dB ripple
+for i_n = n
+
+    [module_S21, module_S11] = LowPassPrototipeChebychevFilter(i_n, pulsation, epsilon);
+    %plot(frequency, 10*log10(module_S21));
+    plot(frequency, 10*log10(module_S11));
+
+end
+
+title('Respuesta teórica de filtros equirrizados de orden 3, 4 y 5');
+xlim([0 max(frequency)]);
+ylim([-0.5 0]);
 xlabel('Frecuencia (Hz)');
 ylabel('Módulo (dB)');
 hold off;
