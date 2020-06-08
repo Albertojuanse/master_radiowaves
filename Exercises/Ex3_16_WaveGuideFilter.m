@@ -64,7 +64,7 @@ RL = -22;
 N = 4;                                        % Order
 [Chebychev_coefficients, Chebychev_norm_impedance, Chebychev_textodis] = LowPassCoefficients('Chebychev',N,RL);
 
-g0 = Chebychev_norm_impedance;
+g0 = 1;
 g1 = Chebychev_coefficients(1);
 g2 = Chebychev_coefficients(2);
 g3 = Chebychev_coefficients(3);

@@ -47,7 +47,7 @@ Q = [100, 1000, 10000];                     % Quality factor
 RL = -22;
 [Chebychev_coefficients, Chebychev_norm_impedance, Chebychev_textodis] = LowPassCoefficients('Chebychev',n,RL);
 
-g0 = Chebychev_norm_impedance;
+g0 = 1;
 g1 = Chebychev_coefficients(1);
 g2 = Chebychev_coefficients(2);
 g3 = Chebychev_coefficients(3);
@@ -137,7 +137,7 @@ ylim([-4 0])
 % xlim([0 max(frequency)]);
     
 % Recuadro 1 sin rellenar
-fk1 = 9.8e9 ; fk2 = 10.2e9 ; val = -20   ; tolk =  20 ; 
+fk1 = 9.8e9 ; fk2 = 10.2e9 ; val = -20   ; tolk =  19.9 ; 
 h1=plot([ fk1 fk1 fk2 fk2 fk1] , [ val+tolk val val val+tolk val+tolk] , 'k' , 'Linewidth' , 1 );
 % Recuadro 2 sin rellenar
 fk1 = 8e9   ; fk2 = 9.25e9 ; val = -40   ; tolk =  40 ; 
