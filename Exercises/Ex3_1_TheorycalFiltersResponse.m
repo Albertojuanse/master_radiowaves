@@ -52,6 +52,7 @@ xlim([0 max(frequency)]);
 ylim([-60 0]);
 xlabel('Frecuencia (Hz)');
 ylabel('Módulo (dB)');
+legend('|S21| del maximalmente plano', '|S21| del equirrizado 0,1 dB', '|S21| del equirrizado 0,01 dB' , 'Location', 'Southwest')
 hold off;
 
 %% Second draw
@@ -89,4 +90,5 @@ xlim([0 max(frequency)]);
 ylim([-0.5 0]);
 xlabel('Frecuencia (Hz)');
 ylabel('Módulo (dB)');
+legend('|S21| del maximalmente plano', '|S21| del equirrizado 0,1 dB', '|S21| del equirrizado 0,01 dB' , 'Location', 'Southwest')
 hold off;

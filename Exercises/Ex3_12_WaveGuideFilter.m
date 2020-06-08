@@ -1,4 +1,4 @@
-clc; clear all; %close all;
+clc; clear all; close all;
 %% Exercise 12
 % Filtro en guía de onda
 % Especificaciones: Banda de paso de 9,8 GHz a 10,2 GHz, con adaptación
@@ -107,40 +107,13 @@ for each_Q = Q
         Chebychev_S12(1, i_pulsation) = S(1,2);
         Chebychev_S21(1, i_pulsation) = S(2,1);
         Chebychev_S22(1, i_pulsation) = S(2,2);
-
-    endfor i_pulsation = 1:m
-
-        ABCD_LT1 = ABCDofLine(Zc, beta(i_pulsation), lambda0/2);
-        ABCD_LT2 = ABCDofLine(Zc, beta(i_pulsation), lambda0/2);
-        ABCD_LT3 = ABCDofLine(Zc, beta(i_pulsation), lambda0/2);
-        ABCD_LT4 = ABCDofLine(Zc, beta(i_pulsation), lambda0/2);
-    %     ABCD_LT5 = ABCDofLine(Zc, beta(i_pulsation), lambda0/2);
-
-        ABCD12 = cascadeABCD(ABCDK1, ABCD_LT1);
-        ABCD13 = cascadeABCD(ABCD12, ABCDK2);
-        ABCD14 = cascadeABCD(ABCD13, ABCD_LT2);
-        ABCD15 = cascadeABCD(ABCD14, ABCDK3);
-        ABCD16 = cascadeABCD(ABCD15, ABCD_LT3);
-        ABCD17 = cascadeABCD(ABCD16, ABCDK4);
-        ABCD18 = cascadeABCD(ABCD17, ABCD_LT4);
-        ABCD19 = cascadeABCD(ABCD18, ABCDK5);
-    %     ABCD110 = cascadeABCD(ABCD19, ABCD_LT5);
-    %     ABCD111 = cascadeABCD(ABCD111, ABCDK6);
-
-        S = ABCDtoS(ABCD19, Zc, Zc);
-
-        Chebychev_S11(1, i_pulsation) = S(1,1);
-        Chebychev_S12(1, i_pulsation) = S(1,2);
-        Chebychev_S21(1, i_pulsation) = S(2,1);
-        Chebychev_S22(1, i_pulsation) = S(2,2);
-
     end
 
     Chebychev_group_delay = -(1/(2*pi))*(diff(unwrap(angle(Chebychev_S21)))./(diff(frequency)));
     Chebychev_group_delay(find(isnan(Chebychev_group_delay)) == 1) = 0;
     
-    %subplot(2,1,1);
-    %plot(frequency, 20*log10(abs(Chebychev_S11)));
+    % subplot(2,1,1);
+    % plot(frequency, 20*log10(abs(Chebychev_S11)));
     plot(frequency, 20*log10(abs(Chebychev_S21)));
     
     % subplot(2,1,2); 
@@ -149,7 +122,7 @@ for each_Q = Q
 
 end
 %subplot(2,1,1);
-title({'S11 and S21 of band pass Chebychev filter designed with concentrated elements for Q = 100, 1000, 10000'});
+title({'S21 of band pass Chebychev filter designed with concentrated elements for Q = 100, 1000, 10000'});
 ylabel('Module (dB)');
 xlabel('Frequency (Hz)');
 % xlim([min(frequency) max(frequency)]);
@@ -176,6 +149,6 @@ h3=plot([ fk1 fk1 fk2 fk2 fk1] , [ val+tolk val val val+tolk val+tolk] , 'k' , '
 fk1 = 11.5e9   ; fk2 = 12e9 ; val = -40   ; tolk =  40 ; 
 h4=plot([ fk1 fk1 fk2 fk2 fk1] , [ val+tolk val val val+tolk val+tolk] , 'k' , 'Linewidth' , 1 );
 
-legend('|S11| Q=100', '|S11| Q=1000', '|S11| Q=10000', 'Location', 'Southeast');
+legend('|S21| Q=100', '|S21| Q=1000', '|S21| Q=10000', 'Location', 'Southeast');
 
 hold off;

@@ -122,7 +122,7 @@ for each_Q = Q
 
 end
 %subplot(2,1,1);
-title({'S11 and S21 of band pass Chebychev filter designed with concentrated elements for Q = 100, 1000, 10000'});
+title({'S21 of band pass Chebychev filter designed with concentrated elements for Q = 100, 1000, 10000'});
 ylabel('Module (dB)');
 xlabel('Frequency (Hz)');
 % xlim([min(frequency) max(frequency)]);
@@ -149,6 +149,6 @@ h3=plot([ fk1 fk1 fk2 fk2 fk1] , [ val+tolk val val val+tolk val+tolk] , 'k' , '
 fk1 = 11.5e9   ; fk2 = 12e9 ; val = -40   ; tolk =  40 ; 
 h4=plot([ fk1 fk1 fk2 fk2 fk1] , [ val+tolk val val val+tolk val+tolk] , 'k' , 'Linewidth' , 1 );
 
-legend('|S11| Q=100', '|S11| Q=1000', '|S11| Q=10000', 'Location', 'Southeast');
+legend('|S21| Q=100', '|S21| Q=1000', '|S21| Q=10000', 'Location', 'Southeast');
 
 hold off;

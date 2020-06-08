@@ -1,4 +1,4 @@
-clc; clear all; %close all;
+clc; clear all; close all;
 %% Exercise 15
 % Filtro en guía de onda
 % Especificaciones: Banda de paso de 9,8 GHz a 10,2 GHz, con adaptación
@@ -123,7 +123,7 @@ end
 Chebychev_group_delay = -(1/(2*pi))*(diff(unwrap(angle(Chebychev_S21)))./(diff(frequency)));
 Chebychev_group_delay(find(isnan(Chebychev_group_delay)) == 1) = 0;
 
-figure(7);
+figure(1);
 %subplot(2,1,1);
 plot(frequency, 20*log10(abs(Chebychev_S11)));
 hold on;

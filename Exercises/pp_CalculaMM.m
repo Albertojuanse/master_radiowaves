@@ -5,27 +5,7 @@
 
 %% Ejemplo 1: filtro a 11 GHz de 300 MHz de banda de orden 4
 f = linspace(8e9, 12e9, 5001);
-% Datos Usuario
-a0 = 19.05; 
-t = 1.5 ; % grosor de los irises
-b0_mm = 9.525 ; lref = 20;
-% w1 = 10.499 ; w2 = 6.706 ; w3 = 6.147 ; % anchura irises
-w1= 11.8680; w2=8.5680; w3=7.8640; w4=8.5680; w5=11.8680;
-d1 = 18.805278850135 ; d2 = 21.275323568315 ; d3 = 21.275323568315; d4 = 18.805278850135; % longitud cavidades (calculadas para tener en cuenta la correccion de fase del iris)
-vfrec_GHz = linspace( 8 , 12 , 5001); % vector de frecuencias del barrido
-
-% Ejecucion
-va_mm = [a0,w1,a0,w2,a0,w3,a0,w4,a0,w5,a0];  % anchura de las 11 guias del filtro
-vd_mm = [lref,t,d1,t,d2,t,d3,t,d4,t,lref];  % longitud de las 11 guias del filtro   
-pintaPerfil( va_mm , vd_mm  );
-[ vS11 , vS21 , vS22 ] = calculaMM( vfrec_GHz , va_mm , vd_mm , b0_mm ) ;
-
-% Representacion
-hfig = figure;
-hp = plot( f , dB( vS11 ),'b', f , dB( vS21 ), 'r--' , 'Linewidth' , 2 ); grid on;
-legend( hp, {'S_{11}','S_{21}'});
-xlabel('Frecuencia (GHz)')
-ylabel('|S_{ij}| (dB)')
+% 
 
 
 %% Ejemplo 2: Calculo del inversor asociado a un iris
